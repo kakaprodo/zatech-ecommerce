@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return AccountBalanceService::calculateBalance($this);
     }
+
+    public function transactions()
+    {
+        return $this->hasManyThrough(Transaction::class, AccountBalance::class);
+    }
 }
