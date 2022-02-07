@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AccountBalanceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\Api\LoginController;
@@ -20,6 +21,12 @@ Route::post('register', [RegisterUserController::class, 'store']);
 
 Route::post('login', [LoginController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::post('topup-account', [AccountBalanceController::class, 'topup']);
 });
