@@ -21,7 +21,7 @@ class AccountBalanceController extends Controller
         $this->accountBalanceService->addMoney($request);
 
         return response()->json([
-            'message' => 'Account Successfully topup'
+            'message' => __('Transaction Successfully done')
         ]);
     }
 }
