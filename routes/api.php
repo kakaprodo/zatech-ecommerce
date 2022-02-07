@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\PurchaseController;
 use App\Http\Controllers\Auth\Api\LoginController;
 use App\Http\Controllers\Api\TransactionController;
 use App\Http\Controllers\Api\AccountBalanceController;
@@ -37,4 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
         TransactionController::class,
         'userTransactions'
     ]);
+
+    Route::post('purchase-product', [PurchaseController::class, 'store']);
 });
