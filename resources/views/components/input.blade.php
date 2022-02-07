@@ -1,3 +1,35 @@
-@props(['disabled' => false])
+@props([
+    'disabled' => false,
+    'label' => null,
+    'name' => null,
+    'textarea' => false,
+])
 
-<input {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50']) !!}>
+@if (!$label)
+    <input name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'input input-bordered']) !!}>
+
+@elseif($textarea)
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">{{ $label }}</span>
+        </label>
+        <textarea name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'textarea h-24 textarea-bordered']) !!}>
+            {!! $attributes['value'] ?? ($attributes['placeholder'] ?? null) !!}
+        </textarea>
+
+        @error($name)
+            <span class="text-error text-sm">{{ $message }}</span>
+        @enderror
+    </div>
+@else
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">{{ $label }}</span>
+        </label>
+        <input name="{{ $name }}" {{ $disabled ? 'disabled' : '' }} {!! $attributes->merge(['class' => 'input input-bordered']) !!}>
+
+        @error($name)
+            <span class="text-error text-sm">{{ $message }}</span>
+        @enderror
+    </div>
+@endif

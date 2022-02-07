@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $this->productService = $productService;
     }
-    
+
     public function index()
     {
         return view('products.index');
@@ -31,6 +31,8 @@ class ProductController extends Controller
     {
         $this->productService->create($request);
 
-        return redirect()->route('admin.products.index');
+        return redirect()
+            ->route('admin.products.index')
+            ->withSuccess('Product successfully created');
     }
 }
