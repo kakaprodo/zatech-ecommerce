@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Services\ProductService;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -20,8 +21,15 @@ class Product extends Model
         return $this->belongsTo(Discount::class);
     }
 
+    // Discount in percentage
     public function getDiscount()
     {
-        return optional($this->discount)->value ?? 0;
+        return optional($this->discount)->value
+            ?? ProductService::findTheDiscount($this);
+    }
+
+    public function calculateDiscount()
+    {
+        return round(($this->price * $this->getDiscount()) / 100, 2);
     }
 }
