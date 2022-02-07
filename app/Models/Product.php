@@ -14,4 +14,14 @@ class Product extends Model
         'price',
         'discount_id'
     ];
+
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class);
+    }
+
+    public function getDiscount()
+    {
+        return optional($this->discount)->value ?? 0;
+    }
 }
