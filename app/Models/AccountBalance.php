@@ -31,4 +31,14 @@ class AccountBalance extends Model
     {
         return $this->hasOne(Transaction::class);
     }
+
+    public function scopeIn($q)
+    {
+        return $q->where('movement_type', self::MOVEMENT_IN);
+    }
+
+    public function scopeOut($q)
+    {
+        return $q->where('movement_type', self::MOVEMENT_OUT);
+    }
 }

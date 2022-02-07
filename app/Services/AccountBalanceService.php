@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Models\AccountBalance;
 
 class AccountBalanceService
@@ -22,5 +23,14 @@ class AccountBalanceService
         ]);
 
         return $balanceLog;
+    }
+
+    public static function calculateBalance(User $user)
+    {
+        $totalIn = $user->accountBalanceLogs()->in()->sum('amount');
+
+        $totalOut = $user->accountBalanceLogs()->out()->sum('amount');
+
+        return $totalIn - $totalOut;
     }
 }

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Auth\Api\LoginController;
 use App\Http\Controllers\Api\AccountBalanceController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Auth\Api\RegisterUserController;
 
 /*
@@ -25,9 +26,7 @@ Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::get('/user', [UserController::class, 'authUser']);
 
     Route::post('topup-account', [AccountBalanceController::class, 'topup']);
 
