@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'login');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'role:' . Role::ADMIN])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');

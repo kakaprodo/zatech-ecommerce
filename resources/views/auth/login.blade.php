@@ -12,6 +12,12 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        <div class="flex flex-col place-content-center">
+            <h1 class="text-2xl">Login to admin dashbaord</h1>
+            <small>Space reserved to admin users only</small>
+        </div>
+        <div class="divider"></div>
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -42,12 +48,12 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900"
                         href="{{ route('password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
-                @endif
+                @endif --}}
 
                 <x-button class="ml-3">
                     {{ __('Log in') }}

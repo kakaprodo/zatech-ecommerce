@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Admin\ProductController;
 use App\Http\Controllers\Web\Admin\PurchaseController;
