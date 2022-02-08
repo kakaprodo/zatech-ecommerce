@@ -2,6 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\DiscountController;
+use App\Http\Controllers\Api\PurchaseController;
+use App\Http\Controllers\Auth\Api\LoginController;
+use App\Http\Controllers\Api\TransactionController;
+use App\Http\Controllers\Api\AccountBalanceController;
+use App\Http\Controllers\Auth\Api\RegisterUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +22,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', [RegisterUserController::class, 'store']);
+
+Route::post('login', [LoginController::class, 'login']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/user', [UserController::class, 'authUser']);
+
+    Route::post('topup-account', [AccountBalanceController::class, 'topup']);
+
+    Route::get('user-transactions', [
+        TransactionController::class,
+        'userTransactions'
+    ]);
+
+    Route::post('purchase-product', [PurchaseController::class, 'store']);
 });
+
+Route::resource('products', ProductController::class)
+    ->only(['index', 'show']);
+
+Route::resource('discounts', DiscountController::class)
+    ->only(['index']);
