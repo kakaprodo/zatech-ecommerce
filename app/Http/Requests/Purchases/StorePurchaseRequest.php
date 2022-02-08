@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Purchases;
 
 use App\Models\Product;
+use App\Services\ProductService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePurchaseRequest extends FormRequest
@@ -12,6 +13,9 @@ class StorePurchaseRequest extends FormRequest
      * @var Product
      */
     public $product;
+    public $discount;
+    public $discountAmount;
+    public $total;
 
 
     /**
@@ -38,7 +42,7 @@ class StorePurchaseRequest extends FormRequest
     {
         return [
             'product_id' => ['required', 'numeric', 'exists:products,id'],
-            'quantity' => ['required', 'numeric', 'min:1', 'max:1']
+            'quantity' => ['required', 'numeric', 'min:1']
         ];
     }
 
@@ -46,18 +50,7 @@ class StorePurchaseRequest extends FormRequest
     {
         $validator->after(function ($validator) {
 
-            $product = Product::find($this->product_id);
-
-            if (!$product) return;
-
-            $this->setProduct($product);
-
-            $total = $product->price - $product->calculateDiscount();
-
-            // check if user has enough money
-            $userHasMoney = $this->user()->getBalance() >= $total;
-
-            if ($userHasMoney) return;
+            if ($this->userHasMoney()) return;
 
             $validator->errors()
                 ->add(
@@ -65,5 +58,19 @@ class StorePurchaseRequest extends FormRequest
                     "You don't have enough money, please topup your account balance"
                 );
         });
+    }
+
+    private function userHasMoney()
+    {
+        $this->product = Product::find($this->product_id);
+
+        if (!$this->product) return;
+
+        $grossAmount = $this->product->price * $this->quantity;
+        $this->discount = ProductService::findTheDiscount($grossAmount);
+        $this->discountAmount = round(($grossAmount * $this->discount) / 100, 2);
+        $this->total = $grossAmount - $this->discountAmount;
+
+        return $this->user()->getBalance() >= $this->total;
     }
 }

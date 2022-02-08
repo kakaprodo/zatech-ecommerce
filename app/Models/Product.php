@@ -25,7 +25,7 @@ class Product extends Model
     public function getDiscount()
     {
         return optional($this->discount)->value
-            ?? ProductService::findTheDiscount($this);
+            ?? ProductService::findTheDiscount($this->price);
     }
 
     public function calculateDiscount()
