@@ -18,14 +18,7 @@ class ProductService
         return Product::create($request->validated());
     }
 
-    public static function findTheDiscount(Product $product)
-    {
-        $price = $product->price;
-
-        return self::calculateManualyProductDiscount($price);
-    }
-
-    public static function calculateManualyProductDiscount($price)
+    public static function findTheDiscount($price)
     {
         if ($price >= 50 &&  $price <= 100) return 0;
 

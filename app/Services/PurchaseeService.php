@@ -12,16 +12,14 @@ class PurchaseeService
         $customer = $request->user();
 
         $product = $request->product;
-        $discountAmount = $product->calculateDiscount();
-        $total = $product->price - $discountAmount;
 
         $purchase = $customer->purchases()->create([
             'product_id' => $product->id,
             'price' => $product->price,
             'quantity' => $request->quantity,
-            'discount' => $product->getDiscount(),
-            'discount_amount' => $discountAmount,
-            'total' => $total
+            'discount' => $request->discount,
+            'discount_amount' => $request->discountAmount,
+            'total' => $request->total
         ]);
 
         AccountBalanceService::chargeAccountForPurchase($purchase);
