@@ -15,7 +15,7 @@
                     @foreach ($purchases as $purchase)
                         <div class="card card-bordered shadow-md">
                             <figure>
-                                <img src="https://picsum.photos/id/1005/400/250">
+                                <img src="{{ $purchase->product->image }}" class="h-56">
                             </figure>
                             <div class="card-body p-3">
                                 <h2 class="card-title">{{ $purchase->product->name }}</h2>

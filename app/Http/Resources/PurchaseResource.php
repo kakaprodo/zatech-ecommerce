@@ -24,7 +24,8 @@ class PurchaseResource extends JsonResource
             'discount' => $this->discount,
             'discount_amount' => $this->discount_amount,
             'total' => $this->total,
-            'created_at' => $this->created_at
+            'created_at' => $this->created_at,
+            'image' => $product->image
         ];
     }
 }

@@ -16,6 +16,13 @@ class Product extends Model
         'discount_id'
     ];
 
+    public function getImageAttribute()
+    {
+        $imgName = 'img-' . rand(1, 4) . '.jpeg';
+
+        return $this->image ?? asset("img/{$imgName}");
+    }
+
     public function discount()
     {
         return $this->belongsTo(Discount::class);
