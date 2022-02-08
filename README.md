@@ -1,66 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Zatech Ecommerce Client side
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Installation
 
-## About Laravel
+Clone the repository from github
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+```
+    git clone https://github.com/kakaprodo/zatech-ecommerce.git
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Then you can install the project dependencies by running
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```
+composer install
+```
 
-## Learning Laravel
+## Start to use the system
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+before anything, please remember to seed data by running
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```
+php artisan db:seed
+```
 
-## Laravel Sponsors
+Then run the serve on port `8000` for supporting api request from the existing client Application.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+```
+php artisan serve --port=8000
+```
 
-### Premium Partners
+## Implementation process
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+In case you may be interested in how we have implemented this system, here are the steps we have followed:
 
-## Contributing
+### Foundation or setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   Install laraval
+-   Install Laravel breeze package for backend authentication
+-   Install Laravel sanctum package for Api authentication
+-   Implement Login and Registration with the help of Laravel breeze
 
-## Code of Conduct
+### Implementation
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+-   (Admin side) - Product management(We could implement the entire CRUD, but we will start with the product creation first other can come after)
+    -   Seed discount settings
+    -   Product creation by applying discount for each product
+    -   Display created products
+-   (Backend)Provide APIs
 
-## Security Vulnerabilities
+    -   Implement Api for registration
+    -   implement Api for login
+    -   Implement Api to topup the user account balance
+    -   Display user account balance
+    -   Implement api to fetch transactions list
+    -   Implement Api for products
+        -   Api to Fetch Products list
+        -   Api to Purchase a product
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-   (Client Side)Hookup APIs
+    -   Setup a React native application
+    -   Design registration page and hookup to its Api
+    -   Design login page and hookup to its Api
+    -   Design Products list page and hookup to its Api
+    -   Design Product Purchase Page and hookup to its Api
+    -   Design Topup page and hookup to its Api
+    -   Design Transaction list page and hookup to its Api
+-   (Backend) remove money from account balance when customer purchase
+-   Support quantity on product
+-   (Client side) - handle error
+-   Manage User Permission with Laratrust Package
+-   (Admin side)Display Purchases
+-   Notify Admin via Email when a product is purchased
+-   Add images to product
+-   Review Discount logic
+-   Seed data into Db to facilitate people who want to test
+-   Document the project in Readme file
 
-## License
+Note: we could not cover everything that are important but in case we get that opportunity, we could improve:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+-   The user experience
+-   responsiveness on client side
+-   add more security for the user access token on client side
+-   improve the way we are retrieving the user account balance, because if the system receives more users, that algorithm can slow down the system
