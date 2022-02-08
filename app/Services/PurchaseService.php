@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\Purchase;
+use App\Mail\ProductPurchased;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\Purchases\StorePurchaseRequest;
 
 
@@ -31,6 +33,9 @@ class PurchaseService
         ]);
 
         AccountBalanceService::chargeAccountForPurchase($purchase);
+
+        Mail::to(UserService::findAdminUser())
+            ->send(new ProductPurchased($purchase));
 
         return $purchase;
     }
