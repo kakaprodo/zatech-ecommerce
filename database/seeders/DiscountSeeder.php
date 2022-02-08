@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\Discount;
 use Illuminate\Database\Seeder;
 
@@ -15,7 +16,7 @@ class DiscountSeeder extends Seeder
     public function run()
     {
         Discount::truncate();
-        
+
         $discounts = [
             [
                 'description' => 'Price 50 - 100 give 0% discount',
@@ -32,7 +33,9 @@ class DiscountSeeder extends Seeder
         ];
 
         foreach ($discounts as $key => $discount) {
-            Discount::create($discount);
+            $discount = Discount::create($discount);
+
+            Product::factory()->count(20)->for($discount)->create();
         }
     }
 }
