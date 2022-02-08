@@ -22,21 +22,4 @@ class Product extends Model
 
         return $this->image ?? asset("img/{$imgName}");
     }
-
-    public function discount()
-    {
-        return $this->belongsTo(Discount::class);
-    }
-
-    // Discount in percentage
-    public function getDiscount()
-    {
-        return optional($this->discount)->value
-            ?? ProductService::findTheDiscount($this->price);
-    }
-
-    public function calculateDiscount()
-    {
-        return round(($this->price * $this->getDiscount()) / 100, 2);
-    }
 }

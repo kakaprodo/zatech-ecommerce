@@ -20,22 +20,29 @@ class DiscountSeeder extends Seeder
         $discounts = [
             [
                 'description' => 'Price 50 - 100 give 0% discount',
-                'value' => 0
+                'value' => 0,
+                'min_price' => 50,
+                'max_price' => 100,
+                'rule' => Discount::RULE_BETWEEN
             ],
             [
                 'description' => 'Price 112 - 115 give 0.25% discount',
-                'value' => 0.25
+                'value' => 0.25,
+                'min_price' => 112,
+                'max_price' => 115,
+                'rule' => Discount::RULE_BETWEEN
             ],
             [
                 'description' => 'Discount for above 120 price give 0.50% discount',
-                'value' => 0.50
+                'value' => 0.50,
+                'min_price' => null,
+                'max_price' => 120,
+                'rule' => Discount::RULE_ABOVE_MAX
             ],
         ];
 
         foreach ($discounts as $key => $discount) {
             $discount = Discount::create($discount);
-
-            Product::factory()->count(20)->for($discount)->create();
         }
     }
 }

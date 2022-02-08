@@ -17,7 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             DiscountSeeder::class,
             LaratrustSeeder::class,
-            AdminUserSeeder::class
+            AdminUserSeeder::class,
+            ProductSeeder::class
         ]);
     }
 }
