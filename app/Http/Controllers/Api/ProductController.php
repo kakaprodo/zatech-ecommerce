@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
@@ -21,5 +22,10 @@ class ProductController extends Controller
         $products = $this->productService->allProducts();
 
         return ProductResource::collection($products);
+    }
+
+    public function show(Product $product)
+    {
+        return new ProductResource($product);
     }
 }
