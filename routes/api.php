@@ -32,7 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('topup-account', [AccountBalanceController::class, 'topup']);
 
-    Route::get('all-products', [ProductController::class, 'index']);
+    Route::resource('products', ProductController::class)
+        ->only(['index', 'show']);
 
     Route::get('user-transactions', [
         TransactionController::class,
