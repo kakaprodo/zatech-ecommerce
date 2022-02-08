@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Purchase;
 use App\Models\AccountBalance;
 
 class AccountBalanceService
 {
-    public function addMoney($request)
+    public function topup($request)
     {
         $user = $request->user();
 
@@ -32,5 +33,21 @@ class AccountBalanceService
         $totalOut = $user->accountBalanceLogs()->out()->sum('amount');
 
         return $totalIn - $totalOut;
+    }
+
+    public static function chargeAccountForPurchase(Purchase $purchase)
+    {
+        $user = $purchase->customer;
+
+        $balanceLog = $user->accountBalanceLogs()->create([
+            'amount' => $purchase->total,
+            'movement_type' => AccountBalance::MOVEMENT_OUT,
+            'description' => AccountBalance::DESCRIPTION_PURCHASE,
+        ]);
+
+        $balanceLog->transaction()->create([
+            'description' => "Purchased {$purchase->product->name}",
+            'type' => AccountBalance::DESCRIPTION_PURCHASE,
+        ]);
     }
 }

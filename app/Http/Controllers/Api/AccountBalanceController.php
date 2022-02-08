@@ -18,7 +18,7 @@ class AccountBalanceController extends Controller
 
     public function topup(TopupAccountRequest $request)
     {
-        $this->accountBalanceService->addMoney($request);
+        $this->accountBalanceService->topup($request);
 
         return response()->json([
             'message' => __('Transaction Successfully done')
