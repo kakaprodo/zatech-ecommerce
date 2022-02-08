@@ -5,6 +5,11 @@ use App\Models\Discount;
 
 class DiscountService
 {
+    public function getAll()
+    {
+        return Discount::latest()->get();
+    }
+
     public static function calcDiscount($price)
     {
         $discounts = Discount::all();
