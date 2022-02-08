@@ -9,18 +9,23 @@ class PurchaseeService
 {
     public function create(StorePurchaseRequest $request)
     {
-        $user = $request->user();
+        $customer = $request->user();
 
         $product = $request->product;
         $discountAmount = $product->calculateDiscount();
+        $total = $product->price - $discountAmount;
 
-        return $user->purchases()->create([
+        $purchase = $customer->purchases()->create([
             'product_id' => $product->id,
             'price' => $product->price,
             'quantity' => $request->quantity,
             'discount' => $product->getDiscount(),
             'discount_amount' => $discountAmount,
-            'total' => $product->price - $discountAmount
+            'total' => $total
         ]);
+
+        AccountBalanceService::chargeAccountForPurchase($purchase);
+
+        return $purchase;
     }
 }

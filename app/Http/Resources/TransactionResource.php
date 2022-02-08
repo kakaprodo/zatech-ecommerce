@@ -22,7 +22,8 @@ class TransactionResource extends JsonResource
             'description' => $this->description,
             'type' => $this->type,
             'amount' => $acountBalanceLog->amount,
-            'is_debit' => $acountBalanceLog->movement_type == AccountBalance::MOVEMENT_OUT
+            'is_debit' => $acountBalanceLog->movement_type == AccountBalance::MOVEMENT_OUT,
+            'created_at' => $this->created_at
         ];
     }
 }

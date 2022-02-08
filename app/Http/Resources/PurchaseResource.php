@@ -23,7 +23,8 @@ class PurchaseResource extends JsonResource
             'quantity' => $this->quantity,
             'discount' => $this->discount,
             'discount_amount' => $this->discount_amount,
-            'total' => $this->total
+            'total' => $this->total,
+            'created_at' => $this->created_at
         ];
     }
 }
