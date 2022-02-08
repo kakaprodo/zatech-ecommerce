@@ -20,6 +20,7 @@
                             <div class="card-body p-3">
                                 <h2 class="card-title">{{ $purchase->product->name }}</h2>
                                 <p>Price: {{ $purchase->price }}$</p>
+                                <p>Quantity: {{ $purchase->quantity }}</p>
                                 <p>Discount: {{ $purchase->discount }}% </p>
                                 <p>Discount amount:{{ $purchase->discount_amount }}$</p>
                                 <p>Total: {{ $purchase->total }}$</p>

@@ -16,17 +16,24 @@ composer install
 
 ## Start to use the system
 
-before anything, please remember to seed data by running
+before anything, please remember to seed data, so that you can have the access to the admin dashboard
 
 ```
 php artisan db:seed
 ```
 
-Then run the serve on port `8000` for supporting api request from the existing client Application.
+Then run the server on port `8000` for supporting api request from the existing client Application.
 
 ```
 php artisan serve --port=8000
 ```
+
+### Login
+
+Use `admin@gmail.com` as username and `password` as user password and then Enjoy
+
+### Purchase product
+Remember to setup email keys in the `.env` for the purchase feature to work with no issue
 
 ## Implementation process
 

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,5 +22,12 @@ class UserService
         ]);
 
         return User::create($userInfo);
+    }
+
+    public static function findAdminUser()
+    {
+        return User::whereHas('roles', function($q) {
+            return $q->whereName(Role::ADMIN);
+        })->first();
     }
 }
