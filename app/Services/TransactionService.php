@@ -9,6 +9,6 @@ class TransactionService
 {
     public function userTransactions(User $user)
     {
-        return $user->transactions()->paginate();
+        return $user->transactions()->latest()->paginate();
     }
 }
