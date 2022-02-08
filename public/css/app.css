@@ -1663,6 +1663,16 @@ html {
   cursor: not-allowed;
   --tw-text-opacity: 0.2;
 }
+.table {
+  position: relative;
+  text-align: left;
+}
+.table th:first-child {
+  position: sticky;
+  position: -webkit-sticky;
+  left: 0;
+  z-index: 10;
+}
 .textarea {
   flex-shrink: 1;
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
@@ -2283,6 +2293,11 @@ html {
   background-image: none;
   padding-right: 1rem;
 }
+.table :where(th,td) {
+  padding: 1rem;
+  vertical-align: middle;
+  white-space: nowrap;
+}
 .table tr.active:nth-child(2n) td,.table tr.active:nth-child(2n) th,.table tr.active td,.table tr.active th {
   --tw-bg-opacity: 1;
   background-color: hsla(var(--b3) / var(--tw-bg-opacity, 1));
@@ -2290,6 +2305,31 @@ html {
 .table tr.hover:hover td,.table tr.hover:hover th,.table tr.hover:nth-child(2n):hover td,.table tr.hover:nth-child(2n):hover th {
   --tw-bg-opacity: 1;
   background-color: hsla(var(--b3) / var(--tw-bg-opacity, 1));
+}
+.table:where(:not(.table-zebra)) :where(thead,tbody,tfoot) :where(tr:not(:last-child) :where(th,td)) {
+  --tw-border-opacity: 1;
+  border-color: hsla(var(--b2) / var(--tw-border-opacity, 1));
+  border-bottom-width: 1px;
+}
+.table :where(thead,tfoot) :where(th,td) {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--b2) / var(--tw-bg-opacity, 1));
+  font-weight: 700;
+  font-size: .75rem;
+  line-height: 1rem;
+  text-transform: uppercase;
+}
+.table :where(thead,tfoot) :where(th,td):first-child {
+  border-top-left-radius: .5rem;
+  border-bottom-left-radius: .5rem;
+}
+.table :where(thead,tfoot) :where(th,td):last-child {
+  border-top-right-radius: .5rem;
+  border-bottom-right-radius: .5rem;
+}
+.table :where(tbody th,tbody td) {
+  --tw-bg-opacity: 1;
+  background-color: hsla(var(--b1) / var(--tw-bg-opacity, 1));
 }
 .textarea-bordered {
   --tw-border-opacity: 0.2;
@@ -2429,6 +2469,9 @@ html {
 }
 .inline-flex {
   display: inline-flex;
+}
+.table {
+  display: table;
 }
 .grid {
   display: grid;
@@ -2616,6 +2659,9 @@ html {
 .border-t {
   border-top-width: 1px;
 }
+.border-r {
+  border-right-width: 1px;
+}
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
@@ -2634,6 +2680,10 @@ html {
 .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
+}
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(156 163 175 / var(--tw-border-opacity));
 }
 .bg-white {
   --tw-bg-opacity: 1;
@@ -2765,6 +2815,9 @@ html {
 .leading-7 {
   line-height: 1.75rem;
 }
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -2853,6 +2906,11 @@ html {
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+.shadow-xl {
+  --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .outline {
