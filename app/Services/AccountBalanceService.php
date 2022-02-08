@@ -32,7 +32,7 @@ class AccountBalanceService
 
         $totalOut = $user->accountBalanceLogs()->out()->sum('amount');
 
-        return $totalIn - $totalOut;
+        return round($totalIn - $totalOut, 2);
     }
 
     public static function chargeAccountForPurchase(Purchase $purchase)

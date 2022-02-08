@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Services\PurchaseeService;
+use App\Services\PurchaseService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PurchaseResource;
 use App\Http\Requests\Purchases\StorePurchaseRequest;
@@ -12,7 +12,7 @@ class PurchaseController extends Controller
 {
     protected $purchaseeService;
 
-    public function __construct(PurchaseeService $purchaseeService)
+    public function __construct(PurchaseService $purchaseeService)
     {
         $this->purchaseeService = $purchaseeService;
     }

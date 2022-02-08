@@ -2,11 +2,19 @@
 
 namespace App\Services;
 
+use App\Models\Purchase;
 use App\Http\Requests\Purchases\StorePurchaseRequest;
 
 
-class PurchaseeService
+class PurchaseService
 {
+    public function allPurchases()
+    {
+        return Purchase::with(['customer', 'product'])
+            ->latest()
+            ->paginate();
+    }
+
     public function create(StorePurchaseRequest $request)
     {
         $customer = $request->user();

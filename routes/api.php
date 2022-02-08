@@ -32,9 +32,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('topup-account', [AccountBalanceController::class, 'topup']);
 
-    Route::resource('products', ProductController::class)
-        ->only(['index', 'show']);
-
     Route::get('user-transactions', [
         TransactionController::class,
         'userTransactions'
@@ -42,3 +39,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('purchase-product', [PurchaseController::class, 'store']);
 });
+
+Route::resource('products', ProductController::class)
+    ->only(['index', 'show']);
