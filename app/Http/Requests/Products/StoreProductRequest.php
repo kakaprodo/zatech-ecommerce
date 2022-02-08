@@ -25,8 +25,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => ['required', 'unique:products', 'max:250'],
-            'price' => ['required', 'numeric', 'min:1'],
-            'discount_id' => ['nullable', 'exists:discounts,id']
+            'price' => ['required', 'numeric', 'min:1']
         ];
     }
 }

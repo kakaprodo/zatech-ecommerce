@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Purchases;
 
 use App\Models\Product;
-use App\Services\ProductService;
+use App\Services\DiscountService;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StorePurchaseRequest extends FormRequest
@@ -67,7 +67,7 @@ class StorePurchaseRequest extends FormRequest
         if (!$this->product) return;
 
         $grossAmount = $this->product->price * $this->quantity;
-        $this->discount = ProductService::findTheDiscount($grossAmount);
+        $this->discount = DiscountService::calcDiscount($grossAmount);
         $this->discountAmount = round(($grossAmount * $this->discount) / 100, 2);
         $this->total = $grossAmount - $this->discountAmount;
 

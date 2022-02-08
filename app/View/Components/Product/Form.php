@@ -8,8 +8,6 @@ use Illuminate\View\Component;
 class Form extends Component
 {
 
-    public $discounts;
-
     /**
      * Create a new component instance.
      *
@@ -17,7 +15,7 @@ class Form extends Component
      */
     public function __construct()
     {
-        $this->discounts = Discount::all();
+    
     }
 
     /**

@@ -18,10 +18,9 @@
                             <figure>
                                 <img src="{{ $product->image }}" class="h-56">
                             </figure>
-                            <div class="card-body">
+                            <div class="card-body p-3">
                                 <h2 class="card-title">{{ $product->name }}</h2>
-                                <p>{{ $product->price }}$</p>
-                                <p>{{ $product->getDiscount() }}% of discount</p>
+                                <p>Price: {{ $product->price }}$</p>
                             </div>
                         </div>
                     @endforeach
