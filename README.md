@@ -45,6 +45,12 @@ If you are on local server, run the server on port `8000` for supporting api req
 php artisan serve --port=8000
 ```
 
+`Note`: if you are on local server and you want to use a different port, please change also the value in the `.env` file like this:
+
+```
+APP_URL=http://localhost:port_number_here
+```
+
 As we are supporting queue for sending emails after a user has purchased a product, let's watch the tasks that will be proccessed in queue by running the bellow command:
 
 ```
