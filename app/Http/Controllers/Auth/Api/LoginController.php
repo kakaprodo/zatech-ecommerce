@@ -11,18 +11,11 @@ use App\Http\Requests\Auth\LoginRequest;
 class LoginController extends Controller
 {
 
-    protected $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function login(LoginRequest $request)
     {
         $request->authenticate();
 
-        $user = $this->userService->findByIdentifier($request->email);
+        $user = $request->user();
 
         $token = $user->createToken($user->id . $user->name);
 

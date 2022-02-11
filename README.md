@@ -14,26 +14,46 @@ Then you can install the project dependencies by running
 composer install
 ```
 
-## Start to use the system
+## Setup the .env file
 
-before anything, please remember to seed data, so that you can have the access to the admin dashboard
+Create the `.env` file in the root folder, then configure it based on the `.env.example` file.
+After taking all the keys from `.env.example` to `.env` file, Here are some important variables that you must configure:
 
 ```
-php artisan db:seed
+QUEUE_CONNECTION=database
+
+MAIL_MAILER=
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=
+MAIL_FROM_ADDRESS=
 ```
 
-Then run the server on port `8000` for supporting api request from the existing client Application.
+## Start using the system
+
+before anything, please remember to seed data into database, so that you can have the access to the admin dashboard
+
+```
+php artisan migrate --seed
+```
+
+If you are on local server, run the server on port `8000` for supporting api request from the existing client Application.
 
 ```
 php artisan serve --port=8000
 ```
 
+As we are supporting queue for sending emails after a user has purchased a product, let's watch the tasks that will be proccessed in queue by running the bellow command:
+
+```
+php artisan queu:work
+```
+
 ### Login
 
-Use `admin@gmail.com` as username and `password` as user password and then Enjoy
-
-### Purchase product
-Remember to setup email keys in the `.env` for the purchase feature to work with no issue
+Congratulation Everything is setup, now for accessing to the admin dashboard, you can use `admin@gmail.com` as username and `password` as user password. Enjoy
 
 ## Implementation process
 
@@ -50,7 +70,7 @@ In case you may be interested in how we have implemented this system, here are t
 
 -   (Admin side) - Product management(We could implement the entire CRUD, but we will start with the product creation first other can come after)
     -   Seed discount settings
-    -   Product creation by applying discount for each product
+    -   Product creation
     -   Display created products
 -   (Backend)Provide APIs
 
@@ -87,4 +107,4 @@ Note: we could not cover everything that are important but in case we get that o
 -   The user experience
 -   responsiveness on client side
 -   add more security for the user access token on client side
--   improve the way we are retrieving the user account balance, because if the system receives more users, that algorithm can slow down the system
+-   improve the way we are retrieving the user account balance, because the more transactions the user makes, the heavier this algorithm becomes
