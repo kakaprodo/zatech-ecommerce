@@ -46,3 +46,5 @@ Route::resource('products', ProductController::class)
 
 Route::resource('discounts', DiscountController::class)
     ->only(['index']);
+
+Route::post('search-products', [ProductController::class, 'searchProduct']);
