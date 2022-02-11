@@ -16,10 +16,11 @@ class Product extends Model
         'discount_id'
     ];
 
-    public function getImageAttribute()
+    protected static function booted()
     {
-        $imgName = 'img-' . rand(1, 4) . '.jpeg';
-
-        return $this->image ?? asset("img/{$imgName}");
+        static::creating(function ($product) {
+            $imgName = 'img-' . rand(1, 4) . '.jpeg';
+            $product->image = asset("img/{$imgName}");
+        });
     }
 }
