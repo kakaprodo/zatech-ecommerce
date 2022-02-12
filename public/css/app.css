@@ -2392,6 +2392,24 @@ html {
   --tw-placeholder-opacity: 0.2;
   color: hsla(var(--bc) / var(--tw-placeholder-opacity, 1));
 }
+.btn-sm {
+  height: 2rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  min-height: 2rem;
+  font-size: .875rem;
+}
+.btn-square:where(.btn-sm) {
+  height: 2rem;
+  padding: 0;
+  width: 2rem;
+}
+.btn-circle:where(.btn-sm) {
+  border-radius: 9999px;
+  height: 2rem;
+  padding: 0;
+  width: 2rem;
+}
 .alert-success {
   --tw-bg-opacity: 0.1;
   background-color: hsla(var(--su) / var(--tw-bg-opacity, 1));
@@ -2536,6 +2554,9 @@ html {
 .h-24 {
   height: 6rem;
 }
+.h-32 {
+  height: 8rem;
+}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -2562,6 +2583,9 @@ html {
 }
 .w-48 {
   width: 12rem;
+}
+.w-32 {
+  width: 8rem;
 }
 .max-w-7xl {
   max-width: 80rem;
@@ -2910,6 +2934,10 @@ html {
 .text-red-600 {
   --tw-text-opacity: 1;
   color: rgb(220 38 38 / var(--tw-text-opacity));
+}
+.text-primary {
+  --tw-text-opacity: 1;
+  color: hsla(var(--p) / var(--tw-text-opacity));
 }
 .underline {
   -webkit-text-decoration-line: underline;
