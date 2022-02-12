@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Products\UpdateProductRequest;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -36,5 +38,28 @@ class ProductController extends Controller
         return redirect()
             ->route('admin.products.index')
             ->withSuccess('Product successfully created');
+    }
+
+    public function show(Product $product)
+    {
+        return view('products.show')->withProduct($product);
+    }
+
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $this->productService->update($request, $product);
+
+        return redirect()
+            ->route('admin.products.index')
+            ->withSuccess('Product successfully updated');
+    }
+
+    public function destroy(Product $product)
+    {
+        $this->productService->delete($product);
+
+        return redirect()
+            ->route('admin.products.index')
+            ->withSuccess('Product successfully deleted');
     }
 }

@@ -19,7 +19,12 @@
                                 <img src="{{ $product->image }}" class="h-56">
                             </figure>
                             <div class="card-body p-3">
-                                <h2 class="card-title">{{ $product->name }}</h2>
+                                <div class="flex justify-between">
+                                    <h2 class="card-title">{{ $product->name }}</h2>
+                                    <a class="text-primary" href="{{ route('admin.products.show', $product) }}">
+                                        View
+                                    </a>
+                                </div>
                                 <p>Price: {{ $product->price }}$</p>
                             </div>
                         </div>
