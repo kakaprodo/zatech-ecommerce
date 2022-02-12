@@ -18,6 +18,13 @@ class PurchaseController extends Controller
         $this->purchaseeService = $purchaseeService;
     }
 
+    public function index()
+    {
+        $purchases =  $this->purchaseeService->allPurchases();
+
+        return PurchaseResource::collection($purchases);
+    }
+
     public function store(StorePurchaseRequest $request)
     {
         $purchase = $this->purchaseeService->create($request);
