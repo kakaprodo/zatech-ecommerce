@@ -38,7 +38,8 @@ Route::middleware('auth:sanctum')->group(function () {
         'userTransactions'
     ]);
 
-    Route::post('purchase-product', [PurchaseController::class, 'store']);
+    Route::apiResource('purchases', PurchaseController::class)
+        ->only(['index', 'store']);
 });
 
 Route::resource('products', ProductController::class)
@@ -46,3 +47,5 @@ Route::resource('products', ProductController::class)
 
 Route::resource('discounts', DiscountController::class)
     ->only(['index']);
+
+Route::post('search-products', [ProductController::class, 'searchProduct']);

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Services\AccountBalanceService;
 use App\Http\Requests\User\TopupAccountRequest;
 
+use Illuminate\Http\Response;
+
 class AccountBalanceController extends Controller
 {
     protected $accountBalanceService;
@@ -22,6 +24,6 @@ class AccountBalanceController extends Controller
 
         return response()->json([
             'message' => __('Transaction Successfully done')
-        ]);
+        ],  Response::HTTP_CREATED);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth\Api;
 
-use Illuminate\Http\Request;
 use App\Services\UserService;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\RegisterRequest;
 
@@ -22,6 +22,9 @@ class RegisterUserController extends Controller
 
         $token = $user->createToken($user->id . $user->name);
 
-        return response()->json(['token' => $token->plainTextToken]);
+        return response()->json(
+            ['token' => $token->plainTextToken],
+            Response::HTTP_CREATED
+        );
     }
 }

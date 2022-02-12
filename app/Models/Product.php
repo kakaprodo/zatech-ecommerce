@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Services\ProductService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -16,10 +17,11 @@ class Product extends Model
         'discount_id'
     ];
 
-    public function getImageAttribute()
+    protected static function booted()
     {
-        $imgName = 'img-' . rand(1, 4) . '.jpeg';
-
-        return $this->image ?? asset("img/{$imgName}");
+        static::creating(function ($product) {
+            $imgName = 'img-' . rand(1, 4) . '.jpeg';
+            $product->image = asset("img/{$imgName}");
+        });
     }
 }

@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Services\ProductService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Products\SearchProductRequest;
 use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
@@ -27,5 +28,12 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return new ProductResource($product);
+    }
+
+    public function searchProduct(SearchProductRequest $request)
+    {
+        $products =  $this->productService->searchProduct($request);
+
+        return ProductResource::collection($products);
     }
 }

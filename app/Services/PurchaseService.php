@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Models\Purchase;
 use App\Mail\ProductPurchased;
 use Illuminate\Support\Facades\Mail;
@@ -13,8 +14,15 @@ class PurchaseService
     public function allPurchases()
     {
         return Purchase::with(['customer', 'product'])
-            ->latest()
-            ->paginate();
+                    ->latest()
+                    ->paginate();
+    }
+
+    public function userPurchases(User $user)
+    {
+        return $user->purchases()
+                    ->latest()
+                    ->paginate();
     }
 
     public function create(StorePurchaseRequest $request)

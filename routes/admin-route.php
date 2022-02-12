@@ -8,8 +8,7 @@ use App\Http\Controllers\Web\Admin\PurchaseController;
 
 
 Route::prefix('admin')->as('admin.')->group(function () {
-    Route::resource('products', ProductController::class)
-        ->only(['index', 'create', 'store']);
+    Route::resource('products', ProductController::class);
 
     Route::resource('purchases', PurchaseController::class)
         ->only(['index']);

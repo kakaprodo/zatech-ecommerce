@@ -8,15 +8,18 @@ use Illuminate\View\Component;
 class Form extends Component
 {
 
+    public $product;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($product = null)
     {
-    
+        $this->product = $product;
     }
+
 
     /**
      * Get the view / contents that represent the component.
