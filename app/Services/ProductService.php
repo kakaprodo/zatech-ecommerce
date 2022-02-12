@@ -33,4 +33,9 @@ class ProductService
 
         return Product::where('name', 'like', "%{$value}%")->paginate();
     }
+
+    public function delete(Product $product)
+    {
+        $product->delete();
+    }
 }

@@ -15,7 +15,7 @@ class Form extends Component
      *
      * @return void
      */
-    public function __construct($product)
+    public function __construct($product = null)
     {
         $this->product = $product;
     }
