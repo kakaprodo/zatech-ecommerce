@@ -31,7 +31,9 @@ class ProductService
     {
         $value = $request->search_value;
 
-        return Product::where('name', 'like', "%{$value}%")->paginate();
+        return Product::where('name', 'like', "%{$value}%")
+            ->orWhere('price', $value)
+            ->paginate();
     }
 
     public function delete(Product $product)
