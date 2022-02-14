@@ -30,9 +30,7 @@ trait HasTestingData
             'password' => Hash::make($userInfo['password'])
         ]);
 
-        return User::firstOrCreate([
-            'email' => $record['email']
-        ], $record);
+        return User::create($record);
     }
 
     public function generateUserToken($user)

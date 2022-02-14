@@ -21,7 +21,9 @@ class PurchaseProductTest extends TestCase
         parent::setUp();
         $this->artisan('db:seed');
 
-        $this->user = $this->createUser();
+        $this->user = $this->createUser($this->registrationInfo(
+            ['email' => $this->faker->email()]
+        ));
 
         $this->topupUserAccount($this->user, 100);
 
