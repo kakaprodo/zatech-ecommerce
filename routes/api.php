@@ -22,16 +22,19 @@ use App\Http\Controllers\Auth\Api\RegisterUserController;
 |
 */
 
-Route::post('register', [RegisterUserController::class, 'store']);
+Route::post('register', [RegisterUserController::class, 'store'])
+    ->name('register');
 
-Route::post('login', [LoginController::class, 'login']);
+Route::post('login', [LoginController::class, 'login'])
+    ->name('login');;
 
 
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user', [UserController::class, 'authUser']);
 
-    Route::post('topup-account', [AccountBalanceController::class, 'topup']);
+    Route::post('topup-account', [AccountBalanceController::class, 'topup'])
+        ->name('topup.account');
 
     Route::get('user-transactions', [
         TransactionController::class,
