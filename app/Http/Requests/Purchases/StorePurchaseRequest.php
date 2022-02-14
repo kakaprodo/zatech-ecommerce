@@ -17,6 +17,7 @@ class StorePurchaseRequest extends FormRequest
     public $discountAmount;
     public $total;
 
+    const NO_MONEY_MESSAGE =  "You don't have enough money, please topup your account balance";
 
     /**
      * Determine if the user is authorized to make this request.
@@ -55,7 +56,7 @@ class StorePurchaseRequest extends FormRequest
             $validator->errors()
                 ->add(
                     'product_id',
-                    "You don't have enough money, please topup your account balance"
+                    self::NO_MONEY_MESSAGE
                 );
         });
     }
