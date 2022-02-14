@@ -5,7 +5,7 @@ namespace Tests\Traits;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-trait HasUserData
+trait HasTestingData
 {
 
     public function registrationInfo()
@@ -20,7 +20,7 @@ trait HasUserData
         ];
     }
 
-    public function createUser($userInfo = null)
+    public function createUser($userInfo = null): User
     {
         $userInfo = $userInfo ?? $this->registrationInfo();
 
@@ -29,5 +29,12 @@ trait HasUserData
         ]);
 
         return User::create($record);
+    }
+
+    public function generateUserToken($user)
+    {
+        $token = $user->createToken($user->id . $user->name);
+
+        return $token->plainTextToken;
     }
 }

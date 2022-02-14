@@ -5,11 +5,11 @@ namespace Tests\Feature\Auth\Api;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Tests\Traits\HasUserData;
+use Tests\Traits\HasTestingData;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase, HasUserData;
+    use RefreshDatabase, HasTestingData;
 
 
     public function test_api_user_login()
@@ -18,7 +18,7 @@ class LoginTest extends TestCase
 
         $this->createUser($registerInfo);
 
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson(route('api.login'), [
             'email' => $registerInfo['email'],
             'password' => $registerInfo['password']
         ]);
@@ -29,7 +29,7 @@ class LoginTest extends TestCase
 
     public function test_api_user_can_not_login_with_wrong_credentials()
     {
-        $response = $this->postJson('/api/login', [
+        $response = $this->postJson(route('api.login'), [
             'email' => 'wrong@gmail.com',
             'password' => 'fake_password'
         ]);

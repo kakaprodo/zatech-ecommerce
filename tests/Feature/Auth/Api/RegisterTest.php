@@ -5,18 +5,18 @@ namespace Tests\Feature\Auth\Api;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use Tests\Traits\HasUserData;
+use Tests\Traits\HasTestingData;
 
 class RegisterTest extends TestCase
 {
-    use RefreshDatabase, HasUserData;
+    use RefreshDatabase, HasTestingData;
 
 
     public function test_api_user_registration()
     {
         $registerInfo = $this->registrationInfo();
 
-        $response = $this->postJson('/api/register', $registerInfo);
+        $response = $this->postJson(route('api.register'), $registerInfo);
 
         $response->assertCreated()
             ->assertJsonStructure(['token']);
@@ -28,7 +28,7 @@ class RegisterTest extends TestCase
 
         $this->createUser($registerInfo);
 
-        $response = $this->postJson('/api/register', $registerInfo);
+        $response = $this->postJson(route('api.register'), $registerInfo);
 
         $response->assertUnprocessable();
     }
