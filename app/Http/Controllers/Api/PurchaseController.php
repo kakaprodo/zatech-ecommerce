@@ -20,7 +20,9 @@ class PurchaseController extends Controller
 
     public function index()
     {
-        $purchases =  $this->purchaseeService->allPurchases();
+        $purchases =  $this->purchaseeService->userPurchases(
+            request()->user()
+        );
 
         return PurchaseResource::collection($purchases);
     }
