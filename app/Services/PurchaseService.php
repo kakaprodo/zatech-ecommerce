@@ -4,8 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Models\Purchase;
-use App\Mail\ProductPurchased;
-use Illuminate\Support\Facades\Mail;
+use App\Jobs\PurchaseCreatedJob;
 use App\Http\Requests\Purchases\StorePurchaseRequest;
 
 
@@ -42,8 +41,7 @@ class PurchaseService
 
         AccountBalanceService::chargeAccountForPurchase($purchase);
 
-        Mail::to(UserService::findAdminUser())
-            ->send(new ProductPurchased($purchase));
+        PurchaseCreatedJob::dispatch($purchase);
 
         return $purchase;
     }
