@@ -21,7 +21,12 @@ class Product extends Model
     {
         static::creating(function ($product) {
             $imgName = 'img-' . rand(1, 4) . '.jpeg';
-            $product->image = asset("img/{$imgName}");
+            $product->image = $imgName;
         });
+    }
+
+    public function getImageAttribute($imageName)
+    {
+        return asset("img/". $imageName);
     }
 }

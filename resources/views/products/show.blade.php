@@ -5,11 +5,11 @@
             <div class="card-body">
                 <div class="flex justify-between">
                     <span class="card-title">Product details</span>
-                    <form method="POST" action="{{ route('admin.products.destroy', $product) }}">
-                        @csrf
-                        @method('DELETE')
-                        <x-button color="error" class="btn-sm">Delete</x-button>
-                    </form>
+                    <x-delete-item  
+                        url="{{ route('admin.products.destroy', $product) }}"
+                        button-id="product-{{ $product->id }}"
+                        item-type="Product"
+                    />
                 </div>
                 <div class="flex flex-col place-items-center">
                     <img src="{{ $product->image }}" alt="" class="h-32 w-32 rounded-md">

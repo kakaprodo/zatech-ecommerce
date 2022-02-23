@@ -32,7 +32,7 @@ class PurchaseController extends Controller
         $purchase = $this->purchaseeService->create($request);
 
         return response()->json([
-            'message' => 'Successfully created',
+            'message' => __('Thank you for purchasing the product'),
             'purchase' => new PurchaseResource($purchase)
         ], Response::HTTP_CREATED);
     }
