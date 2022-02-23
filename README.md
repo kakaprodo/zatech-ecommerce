@@ -17,7 +17,7 @@ composer install
 ## Setup the .env file
 
 Create the `.env` file in the root folder, then configure it based on the `.env.example` file.
-After taking all the keys from `.env.example` to `.env` file, Here are some important variables that you must configure:
+After taking all the keys from `.env.example` to `.env` file, Here are some important variables that you `must` configure:
 
 ```
 QUEUE_CONNECTION=database
@@ -33,29 +33,31 @@ MAIL_FROM_ADDRESS=
 
 ## Start using the system
 
-before anything, please remember to seed data into database, so that you can have the access to the admin dashboard
+Before anything, please remember to seed data into database, so that you can have the access to the admin dashboard
 
 ```
 php artisan migrate --seed
 ```
 
-If you are on local server, run the server on port `8000` for supporting api request from the existing client Application.
+Then run the server
 
 ```
-php artisan serve --port=8000
+php artisan serve
 ```
 
-`Note`: if you are on local server and you want to use a different port, please change also the value in the `.env` file like this:
+`Note`: 
+In the `.env`, the APP_URL should be set depending on your local config (e.g. valet, sail etc.)
+`APP_URL=http://localhost:port_number_here`  >> or your domain (e.g. `APP_URL=http://domain.com`).
 
-```
-APP_URL=http://localhost:port_number_here
-```
+## Mailing
 
-As we are supporting queue for sending emails after a user has purchased a product, let's watch the tasks that will be proccessed in queue by running the bellow command:
+As we are supporting queue for sending emails after a user has purchased a product, let's watch the tasks that will be proccessed in laravel queue by running the bellow command:
 
 ```
 php artisan queu:work
 ```
+
+`Note`: Please remember to set in the .env file the `QUEUE_CONNECTION` to `database`.
 
 ### Login
 
